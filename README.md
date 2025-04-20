@@ -1,6 +1,8 @@
-# عييت (I'm Tired) - Anti-Productivity App
+# it's homework
 
 An Ionic mobile application that playfully discourages users from working excessively. Unlike traditional productivity apps that reward work, this app expresses disappointment when users report working and celebrates when they're resting.
+
+**Note:** This is a homework assignment, not a full project.
 
 ## Features
 
@@ -78,3 +80,8 @@ The app uses:
 "عييت" (I'm Tired) is designed with a tongue-in-cheek approach to productivity, celebrating rest rather than work. The app uses gentle humor and mock disappointment to encourage users to maintain a healthy work-life balance and take more breaks.
 
 The Arabic title "عييت" (pronounced "ayeet") conveys the feeling of being tired or fed up with work, which reinforces the app's core message.
+
+## Screenshots
+
+![Screenshot 1](./screanshots/image.png)
+![Screenshot 2](./screanshots/image1.png)
