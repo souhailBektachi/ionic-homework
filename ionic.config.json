@@ -1,0 +1,7 @@
+{
+  "name": "\"عييت\" — Take a Break App",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
