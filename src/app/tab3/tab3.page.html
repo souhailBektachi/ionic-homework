@@ -1,17 +1,169 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 3
+      الإحصائيات
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding shaped-content">
+  <div class="stats-container">
+    <ion-card class="dashboard-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="speedometer-outline"></ion-icon>
+          مقياس الخيبة
+        </ion-card-title>
+      </ion-card-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+      <ion-card-content>
+        <div class="gauge-container">
+          <div class="gauge">
+            <div class="gauge-body">
+              <div class="gauge-fill" [style.transform]="'rotate(' + (disappointmentLevel * 180) + 'deg)'">
+                <span class="gauge-cover" [style.background]="getDisappointmentColor()"></span>
+              </div>
+              <div class="gauge-center">
+                <span class="gauge-value">{{(disappointmentLevel * 100).toFixed(0)}}%</span>
+                <span class="gauge-label">مستوى الخيبة</span>
+              </div>
+            </div>
+            <div class="gauge-labels">
+              <span class="low">منخفض</span>
+              <span class="high">مرتفع</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-message">
+          <ion-chip [color]="getDisappointmentColor()" outline>
+            <ion-icon [name]="disappointmentLevel > 0.5 ? 'sad-outline' : 'happy-outline'"></ion-icon>
+            <ion-label>{{getDisappointmentMessage()}}</ion-label>
+          </ion-chip>
+        </div>
+
+        <ion-button expand="block" fill="outline" (click)="resetDisappointment()" (keydown.enter)="resetDisappointment()">
+          صافي لمقياس الخيبة
+          <ion-icon slot="start" name="refresh-outline"></ion-icon>
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="weekly-stats" *ngIf="workHistory.length > 0">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="calendar-outline"></ion-icon>
+          إحصائيات السيمانة
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-icon" [style.background-color]="'rgba(var(--ion-color-danger-rgb), 0.1)'">
+              <ion-icon name="time-outline" color="danger"></ion-icon>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value text-danger">{{weeklyTotalHours}}</div>
+              <div class="stat-label">المجموع ديال ساعات الخدمة</div>
+            </div>
+          </div>
+
+          <div class="stat-box">
+            <div class="stat-icon" [style.background-color]="'rgba(var(--ion-color-' + getColorForHours(weeklyAverage) + '-rgb), 0.1)'">
+              <ion-icon name="calculator-outline" [color]="getColorForHours(weeklyAverage)"></ion-icon>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value" [ngClass]="'text-' + getColorForHours(weeklyAverage)">{{weeklyAverage.toFixed(1)}}</div>
+              <div class="stat-label">المعدل اليومي ديال الخدمة</div>
+            </div>
+          </div>
+
+          <div class="stat-box">
+            <div class="stat-icon" [style.background-color]="'rgba(var(--ion-color-danger-rgb), 0.1)'">
+              <ion-icon name="sad-outline" color="danger"></ion-icon>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value text-danger">{{overworkDays}}</div>
+              <div class="stat-label">أيام الخدمة لي بزاف (>8 ساعات)</div>
+            </div>
+          </div>
+
+          <div class="stat-box">
+            <div class="stat-icon" [style.background-color]="'rgba(var(--ion-color-success-rgb), 0.1)'">
+              <ion-icon name="happy-outline" color="success"></ion-icon>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value text-success">{{restDays}}</div>
+              <div class="stat-label">أيام الراحة (<4 ساعات)</div>
+            </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="shame-board" *ngIf="workHistory.length > 0">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          لوحة الحشومة
+        </ion-card-title>
+        <ion-card-subtitle>أيام الخدمة لي بزاف</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list class="shame-list">
+          <ion-item *ngFor="let entry of overworkEntries" class="shame-item" lines="full">
+            <ion-icon name="calendar-outline" slot="start" color="tired"></ion-icon>
+            <ion-label>
+              <h3>{{formatDate(entry.date)}}</h3>
+              <p>{{entry.hours}} ساعة ديال الخدمة</p>
+            </ion-label>
+            <ion-chip color="tired" slot="end">حشومة عليك!</ion-chip>
+          </ion-item>
+
+          <ion-item *ngIf="overworkEntries.length === 0" lines="none" class="empty-shame">
+            <ion-label class="text-center">
+              <ion-icon name="thumbs-up-outline" class="empty-icon"></ion-icon>
+              <h3>مافيهاش أيام ديال الخدمة بزاف!</h3>
+              <p>مزيان بزاف! بقى مرتاح</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="settings-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="options-outline"></ion-icon>
+          الإعدادات
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list class="settings-list">
+          <ion-item lines="full" class="settings-item">
+            <ion-icon name="flame-outline" slot="start" color="warning"></ion-icon>
+            <ion-label>شدة العقاب</ion-label>
+            <ion-select [(ngModel)]="judgmentSeverity" (ionChange)="saveSettings()" interface="popover">
+              <ion-select-option value="low">ناقصة</ion-select-option>
+              <ion-select-option value="medium">متوسطة</ion-select-option>
+              <ion-select-option value="high">قاسية</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item lines="none" class="settings-item">
+            <ion-icon name="notifications-outline" slot="start" color="primary"></ion-icon>
+            <ion-label>وقيتاش يجي التذكير</ion-label>
+            <ion-select [(ngModel)]="reminderFrequency" (ionChange)="saveSettings()" interface="popover">
+              <ion-select-option value="hourly">كل ساعة</ion-select-option>
+              <ion-select-option value="2hours">كل جوج ساعات</ion-select-option>
+              <ion-select-option value="4hours">كل 4 ساعات</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

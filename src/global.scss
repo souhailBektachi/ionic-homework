@@ -10,20 +10,20 @@
  */
 
 /* Core CSS required for Ionic components to work properly */
-@import "@ionic/angular/css/core.css";
+@import "~@ionic/angular/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
-@import "@ionic/angular/css/normalize.css";
-@import "@ionic/angular/css/structure.css";
-@import "@ionic/angular/css/typography.css";
-@import "@ionic/angular/css/display.css";
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
 
 /* Optional CSS utils that can be commented out */
-@import "@ionic/angular/css/padding.css";
-@import "@ionic/angular/css/float-elements.css";
-@import "@ionic/angular/css/text-alignment.css";
-@import "@ionic/angular/css/text-transformation.css";
-@import "@ionic/angular/css/flex-utils.css";
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
 
 /**
  * Ionic Dark Mode
@@ -35,3 +35,267 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+/* App Global Styling */
+:root {
+  --ion-font-family: 'Cairo', sans-serif;
+  --ion-background-color: #f8f9fd;
+}
+
+/* Custom global styles */
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+/* Card styling */
+ion-card {
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  margin: 10px;
+  
+  ion-card-header {
+    padding-bottom: 8px;
+    background-color: rgba(var(--ion-color-primary-rgb), 0.05);
+    padding: 16px;
+    
+    ion-card-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--ion-color-primary);
+    }
+    
+    ion-card-subtitle {
+      font-size: 0.9rem;
+      color: var(--ion-color-medium);
+      margin-top: 4px;
+    }
+  }
+  
+  ion-card-content {
+    padding-top: 0;
+  }
+}
+
+/* Button styling */
+ion-button {
+  --border-radius: 10px;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  text-transform: none;
+  height: 48px;
+  margin: 8px 0;
+  letter-spacing: 0;
+  
+  &.button-solid {
+    --background: var(--ion-color-primary);
+    --color: var(--ion-color-primary-contrast);
+  }
+  
+  &.button-outline {
+    --border-color: var(--ion-color-primary);
+    --color: var(--ion-color-primary);
+  }
+  
+  &.button-large {
+    --padding-top: 16px;
+    --padding-bottom: 16px;
+    --padding-start: 20px;
+    --padding-end: 20px;
+    margin: 10px 0;
+  }
+}
+
+/* Item styling */
+ion-item {
+  --border-radius: 8px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+  margin-bottom: 6px;
+  --inner-padding-end: 0;
+  --background: transparent;
+  --border-color: rgba(var(--ion-color-medium-rgb), 0.2);
+  --border-style: solid;
+  --border-width: 0 0 1px 0;
+  
+  &:last-child {
+    --border-width: 0;
+  }
+  
+  ion-label {
+    font-weight: 500;
+  }
+}
+
+/* List styling */
+ion-list {
+  background: transparent;
+  padding: 8px;
+}
+
+/* Badge styling */
+ion-badge {
+  padding: 6px 10px;
+  border-radius: 99px;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+/* Header styling */
+ion-header ion-toolbar {
+  --background: var(--ion-color-primary);
+  --color: var(--ion-color-primary-contrast);
+  
+  ion-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    padding: 8px 0;
+  }
+}
+
+/* Toolbar styling */
+ion-toolbar {
+  --background: var(--ion-color-primary);
+  --color: var(--ion-color-primary-contrast);
+  
+  ion-title {
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+}
+
+/* Custom shaped content */
+.shaped-content {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: var(--ion-color-primary);
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    z-index: -1;
+  }
+}
+
+/* Typography enhancements */
+h2, h3 {
+  font-weight: 700;
+  color: var(--ion-color-dark);
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Meter container styling */
+.meter-container {
+  padding: 20px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+/* Animation for feedback */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+/* Animation classes */
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.scale-in {
+  animation: scaleIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Custom utility classes */
+.rounded-box {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.text-bold {
+  font-weight: 700;
+}
+
+.shadow-sm {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.shadow-md {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-lg {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.text-gradient {
+  background: linear-gradient(45deg, var(--ion-color-primary), var(--ion-color-secondary));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Progress bar styling */
+.custom-progress {
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  
+  .progress-bar {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+  }
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+  .dashboard-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+}

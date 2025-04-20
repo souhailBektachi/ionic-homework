@@ -1,0 +1,430 @@
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px 0 30px 0;
+}
+
+ion-card-title, ion-card-subtitle, ion-label, h3, p, ion-note {
+  direction: rtl;
+  text-align: right;
+}
+
+ion-button {
+  direction: rtl;
+}
+
+.disappointment-card {
+  .meter-container {
+    position: relative;
+    margin: 15px 0;
+    
+    ion-progress-bar {
+      height: 20px;
+      border-radius: 10px;
+    }
+    
+    .meter-value {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+  }
+  
+  .stats-message {
+    margin: 15px 0;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    
+    p {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+  }
+  
+  ion-button {
+    margin-top: 10px;
+  }
+}
+
+.weekly-stats, .shame-board, .settings {
+  ion-item {
+    --padding-start: 0;
+    
+    ion-label {
+      margin-left: 8px;
+    }
+    
+    ion-badge {
+      padding: 8px;
+      font-size: 14px;
+    }
+  }
+}
+
+.shame-board {
+  ion-label h3 {
+    font-weight: 500;
+  }
+  
+  ion-note {
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+  
+  .no-shame-message {
+    color: var(--ion-color-success);
+    text-align: center;
+    font-weight: 600;
+  }
+}
+
+.settings {
+  ion-select {
+    direction: rtl;
+    text-align: right;
+  }
+}
+
+// Dashboard card with gauge styling
+.dashboard-card {
+  margin-top: 30px;
+  
+  ion-card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+    ion-icon {
+      font-size: 24px;
+      color: var(--ion-color-primary);
+    }
+  }
+  
+  .gauge-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    
+    .gauge {
+      position: relative;
+      width: 220px;
+      height: 110px;
+      margin-bottom: 40px;
+      
+      .gauge-body {
+        position: relative;
+        height: 100%;
+        background: rgba(var(--ion-color-medium-rgb), 0.1);
+        border-top-left-radius: 110px;
+        border-top-right-radius: 110px;
+        overflow: hidden;
+        box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      
+      .gauge-fill {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--ion-color-success);
+        transform-origin: center top;
+        transform: rotate(0deg);
+        transition: transform 1s ease-out;
+      }
+      
+      .gauge-cover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      
+      .gauge-center {
+        position: absolute;
+        top: 20px;
+        left: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        
+        .gauge-value {
+          font-size: 2rem;
+          font-weight: 700;
+          color: var(--ion-color-dark);
+          margin-bottom: 4px;
+        }
+        
+        .gauge-label {
+          font-size: 0.9rem;
+          color: var(--ion-color-medium);
+        }
+      }
+      
+      .gauge-labels {
+        position: absolute;
+        bottom: -30px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        
+        .low, .high {
+          font-size: 0.85rem;
+          color: var(--ion-color-medium);
+        }
+      }
+    }
+  }
+  
+  .stats-message {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    
+    ion-chip {
+      height: auto;
+      padding: 12px 16px;
+      font-size: 1rem;
+      
+      ion-icon {
+        margin-inline-end: 8px;
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
+
+// Weekly stats card styling
+.weekly-stats {
+  ion-card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+    ion-icon {
+      font-size: 24px;
+      color: var(--ion-color-primary);
+    }
+  }
+  
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    
+    .stat-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px;
+      background-color: rgba(var(--ion-color-light-rgb), 0.5);
+      border-radius: 12px;
+      
+      .stat-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        margin-bottom: 12px;
+        
+        ion-icon {
+          font-size: 24px;
+        }
+      }
+      
+      .stat-content {
+        text-align: center;
+        
+        .stat-value {
+          font-size: 1.8rem;
+          font-weight: 700;
+          margin-bottom: 8px;
+          
+          &.text-success {
+            color: var(--ion-color-success);
+          }
+          
+          &.text-warning {
+            color: var(--ion-color-warning);
+          }
+          
+          &.text-danger {
+            color: var(--ion-color-danger);
+          }
+        }
+        
+        .stat-label {
+          font-size: 0.85rem;
+          color: var(--ion-color-medium);
+          line-height: 1.4;
+        }
+      }
+    }
+  }
+}
+
+// Shame board card styling
+.shame-board {
+  ion-card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+    ion-icon {
+      font-size: 24px;
+      color: var(--ion-color-primary);
+    }
+  }
+  
+  ion-card-subtitle {
+    margin-top: 4px;
+    color: var(--ion-color-medium);
+    font-size: 0.9rem;
+  }
+  
+  .shame-list {
+    background: transparent;
+    padding: 0;
+    
+    .shame-item {
+      --padding-start: 12px;
+      --inner-padding-end: 12px;
+      margin-bottom: 4px;
+      border-radius: 8px;
+      
+      ion-icon {
+        font-size: 20px;
+      }
+      
+      h3 {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--ion-color-dark);
+      }
+      
+      p {
+        margin: 6px 0 0;
+        font-size: 0.9rem;
+        color: var(--ion-color-medium);
+      }
+      
+      ion-chip {
+        margin: 0;
+        height: 24px;
+        font-size: 0.85rem;
+      }
+    }
+    
+    .empty-shame {
+      padding: 30px 16px;
+      
+      .empty-icon {
+        font-size: 40px;
+        margin: 0 auto 16px;
+        display: block;
+        color: var(--ion-color-success);
+        opacity: 0.8;
+      }
+      
+      h3 {
+        text-align: center;
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+        color: var(--ion-color-dark);
+      }
+      
+      p {
+        text-align: center;
+        font-size: 0.9rem;
+        color: var(--ion-color-medium);
+        margin: 0;
+      }
+    }
+  }
+}
+
+// Settings card styling
+.settings-card {
+  ion-card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+    ion-icon {
+      font-size: 24px;
+      color: var(--ion-color-primary);
+    }
+  }
+  
+  .settings-list {
+    background: transparent;
+    padding: 0;
+    
+    .settings-item {
+      --padding-start: 0;
+      --inner-padding-end: 0;
+      
+      ion-icon {
+        margin-inline-end: 16px;
+        font-size: 22px;
+      }
+      
+      ion-label {
+        font-size: 1rem;
+        color: var(--ion-color-dark);
+      }
+      
+      ion-select {
+        max-width: 50%;
+        color: var(--ion-color-primary);
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+// Text helpers
+.text-center {
+  text-align: center !important;
+}
+
+// RTL support
+ion-title, h2, h3, ion-label, p, ion-button, ion-card-title, ion-card-subtitle, ion-select, ion-chip {
+  direction: rtl;
+  text-align: right;
+}
+
+// Responsive adjustments for larger screens
+@media (min-width: 768px) {
+  .stats-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    
+    .dashboard-card {
+      grid-column: span 2;
+    }
+    
+    .weekly-stats {
+      grid-row: span 1;
+    }
+    
+    .shame-board {
+      grid-row: span 2;
+    }
+  }
+}

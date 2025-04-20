@@ -1,0 +1,435 @@
+ion-content {
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px; // Increased gap for better separation
+}
+
+// Card base style with refined animation and appearance
+ion-card {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border-radius: 12px; // Slightly softer corners
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); // Softer initial shadow
+  margin-left: 0; // Remove default margins if any
+  margin-right: 0;
+  margin-top: 0;
+  margin-bottom: 0; // Control spacing via gap in container
+
+  &:hover {
+    transform: translateY(-4px); // Subtle lift
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1); // Enhanced shadow on hover
+  }
+}
+
+ion-card-header {
+  padding-bottom: 8px; // Adjust spacing
+}
+
+ion-card-title {
+  font-size: 1.3rem; // Slightly larger title
+  font-weight: 600; // Bolder title
+  color: var(--ion-color-primary); // Use primary color for titles
+}
+
+ion-card-content {
+  padding-top: 8px; // Adjust spacing
+}
+
+// Disappointment meter styles refinement
+.disappointment-section {
+  ion-card { // Target card within this section specifically if needed
+    background: var(--ion-card-background, var(--ion-item-background, var(--ion-background-color, #fff))); // Use theme background
+  }
+
+  .meter-title {
+    margin-bottom: 16px;
+    text-align: center;
+
+    h2 { // Keep h2 styles if used, or adjust if using ion-card-title
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--ion-text-color); // Use standard text color
+    }
+  }
+
+  .meter-container {
+    position: relative;
+    margin: 20px 0;
+
+    .meter-background {
+      background-color: var(--ion-color-light-shade); // Use a theme color
+      border-radius: 20px;
+      overflow: hidden;
+      height: 30px; // Ensure background has height
+
+      ion-progress-bar {
+        height: 30px;
+        border-radius: 20px;
+        --background: transparent;
+        --progress-background: linear-gradient(90deg, var(--ion-color-secondary), var(--ion-color-primary)); // Gradient progress
+        transition: width 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); // Smoother animation
+      }
+    }
+
+    .meter-value {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-weight: 700; // Bolder value
+      font-size: 1rem;
+      color: var(--ion-color-primary-contrast); // Ensure contrast
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .judgment-message {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+
+    ion-chip {
+      height: auto;
+      padding: 10px 14px; // Adjust padding
+      font-size: 0.95rem; // Adjust size
+      border-radius: 16px;
+      font-weight: 500;
+      background-color: var(--ion-color-tertiary); // Use tertiary color
+      color: var(--ion-color-tertiary-contrast);
+
+      ion-icon {
+        margin-inline-end: 6px;
+        font-size: 1.1rem;
+      }
+    }
+  }
+}
+
+// Work checkin styles refinement
+.work-checkin {
+   ion-card { // Target card within this section specifically if needed
+     background: var(--ion-card-background, var(--ion-item-background, var(--ion-background-color, #fff))); // Use theme background
+   }
+
+  h3 { // Style if using h3, or use ion-card-title styling
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: var(--ion-color-dark);
+    font-weight: 600;
+  }
+
+  .checkin-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    ion-button {
+      margin: 0;
+      --border-radius: 10px; // Slightly less rounded
+      font-weight: 600;
+      text-transform: none;
+      height: 46px; // Adjust height
+      font-size: 1rem; // Standardize font size
+      --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // Subtle shadow
+
+      ion-icon {
+        font-size: 1.4rem; // Slightly larger icon
+        margin-inline-end: 10px; // More space for icon
+      }
+
+      &.working-button {
+        --background: var(--ion-color-secondary);
+        --background-activated: var(--ion-color-secondary-shade);
+        --background-hover: var(--ion-color-secondary-tint);
+        --color: var(--ion-color-secondary-contrast);
+         --box-shadow: 0 4px 10px rgba(var(--ion-color-secondary-rgb), 0.3); // Themed shadow
+      }
+
+      &.relaxing-button {
+        --background: var(--ion-color-primary);
+        --background-activated: var(--ion-color-primary-shade);
+        --background-hover: var(--ion-color-primary-tint);
+        --color: var(--ion-color-primary-contrast);
+        --box-shadow: 0 4px 10px rgba(var(--ion-color-primary-rgb), 0.3); // Themed shadow
+      }
+    }
+  }
+}
+
+// Ensure ExploreContainer has some padding if used directly
+app-explore-container {
+  padding: 16px;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 15px 0;
+}
+
+// Card base style with animation
+ion-card {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// Disappointment meter styles
+.disappointment-section {
+  .main-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fd 100%);
+    border: none;
+    margin-top: 30px;
+    border-radius: 16px; // Smoother corners
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  }
+  
+  .meter-title {
+    margin-bottom: 16px;
+    text-align: center;
+    
+    h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 600; // Slightly bolder title
+    }
+  }
+  
+  .meter-container {
+    position: relative;
+    margin: 20px 0;
+    
+    .meter-background {
+      background-color: rgba(0, 0, 0, 0.05);
+      border-radius: 20px;
+      overflow: hidden;
+      
+      ion-progress-bar {
+        height: 30px;
+        border-radius: 20px;
+        --background: transparent;
+        --progress-background: var(--ion-color-primary); // Use primary color for progress
+        transition: width 0.5s ease-out; // Smooth progress animation
+      }
+    }
+    
+    .meter-value {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-weight: 600;
+      font-size: 1.1rem; // Slightly smaller text
+      color: white;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+  }
+  
+  .judgment-message {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    
+    ion-chip {
+      height: auto;
+      padding: 12px 16px;
+      font-size: 1rem;
+      border-radius: 16px; // Match card corners
+      font-weight: 500;
+      
+      ion-icon {
+        margin-inline-end: 8px;
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
+
+.work-checkin {
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px; // Smoother corners
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  
+  h3 {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: var(--ion-color-dark);
+  }
+  
+  .checkin-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    
+    ion-button {
+      margin: 0;
+      padding: 0;
+      --border-radius: 12px; // Rounded buttons
+      font-weight: 600;
+      text-transform: none; // Keep original casing
+      height: 48px; // Taller buttons
+      
+      ion-icon {
+        font-size: 24px;
+        margin-inline-end: 8px;
+      }
+      
+      &.working-button {
+        --box-shadow: 0 4px 12px rgba(224, 132, 143, 0.3);
+        --background: var(--ion-color-secondary); // Use secondary color
+        --background-activated: var(--ion-color-secondary-shade);
+        --color: var(--ion-color-secondary-contrast);
+      }
+      
+      &.relaxing-button {
+        --box-shadow: 0 4px 12px rgba(123, 201, 224, 0.3);
+        --background: var(--ion-color-primary); // Use primary color
+        --background-activated: var(--ion-color-primary-shade);
+        --color: var(--ion-color-primary-contrast);
+      }
+    }
+  }
+}
+
+.response-section {
+  .response-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+    border-radius: 16px; // Smoother corners
+    animation: fadeIn 0.5s ease-out; // Add fade-in animation
+    
+    &.positive {
+      border-left: 5px solid var(--ion-color-primary); // Use primary color
+      box-shadow: 0 6px 16px rgba(var(--ion-color-primary-rgb), 0.15) !important;
+      
+      ion-card-header {
+        background-color: rgba(var(--ion-color-primary-rgb), 0.05);
+      }
+      
+      ion-card-title {
+        color: var(--ion-color-primary); // Use primary color
+      }
+    }
+    
+    &.negative {
+      border-left: 5px solid var(--ion-color-secondary); // Use secondary color
+      box-shadow: 0 6px 16px rgba(var(--ion-color-secondary-rgb), 0.15) !important;
+      
+      ion-card-header {
+        background-color: rgba(var(--ion-color-secondary-rgb), 0.05);
+      }
+      
+      ion-card-title {
+        color: var(--ion-color-secondary); // Use secondary color
+      }
+    }
+    
+    ion-card-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.2rem;
+      
+      ion-icon {
+        font-size: 24px;
+      }
+    }
+    
+    ion-card-content p {
+      margin: 12px 0 0;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+  }
+}
+
+.daily-hours {
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px; // Smoother corners
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  
+  h3 {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: var(--ion-color-dark);
+  }
+  
+  ion-button {
+    margin-top: 15px;
+    --border-radius: 12px; // Rounded button
+    font-weight: 600;
+    text-transform: none;
+    height: 48px;
+  }
+  
+  ion-item.hours-input {
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    --background: transparent;
+    margin-bottom: 16px;
+    
+    ion-label {
+      color: var(--ion-color-medium);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    
+    ion-input {
+      --padding-start: 16px;
+      --padding-end: 16px;
+      --padding-top: 12px;
+      --padding-bottom: 12px;
+      --background: rgba(var(--ion-color-primary-rgb), 0.05);
+      --border-radius: 12px; // Rounded input
+      --placeholder-color: var(--ion-color-medium);
+      font-size: 1rem;
+      font-weight: 500;
+      margin-top: 4px;
+    }
+  }
+}
+
+// RTL support
+ion-title, h2, h3, ion-label, p, ion-chip, ion-button, ion-card-title, ion-card-content, ion-input::placeholder {
+  direction: rtl;
+  text-align: right;
+}
+
+// Responsive design
+@media (min-width: 768px) {
+  .dashboard-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    
+    .disappointment-section, .response-section {
+      grid-column: span 2;
+    }
+  }
+}
+
+// Add fade-in animation keyframes
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

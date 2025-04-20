@@ -1,17 +1,138 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      الخدمة
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding shaped-content">
+  <div class="work-tracker-container">
+    <ion-card class="input-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="calendar-outline"></ion-icon>
+          سجل ساعات الخدمة
+        </ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <div class="date-picker">
+          <ion-item lines="none" class="custom-item">
+            <ion-label position="stacked">التاريخ</ion-label>
+            <ion-datetime-button datetime="work-date" class="custom-date-button"></ion-datetime-button>
+          </ion-item>
+          
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime 
+                id="work-date"
+                [value]="selectedDate"
+                (ionChange)="onDateChange($event)"
+                locale="ar-MA"
+                presentation="date">
+              </ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </div>
+        
+        <div class="hour-input">
+          <ion-item lines="none" class="custom-item">
+            <ion-label position="stacked">ساعات الخدمة</ion-label>
+            <ion-input
+              class="custom-input"
+              type="number"
+              [(ngModel)]="workHours" 
+              min="0"
+              max="24"
+              placeholder="0-24 ساعة">
+            </ion-input>
+          </ion-item>
+        </div>
+        
+        <ion-button expand="block" color="primary" (click)="recordWorkHours()" (keydown.enter)="recordWorkHours()">
+          <ion-icon slot="start" name="save-outline"></ion-icon>
+          سجل ساعات الخدمة
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+    <ion-card class="history-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="time-outline"></ion-icon>
+          سجل الخدمة لي داير
+        </ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <ion-list class="history-list">
+          <ion-item-sliding *ngFor="let entry of workHistory.slice().reverse().slice(0, 10)">
+            <ion-item lines="full" class="history-item">
+              <ion-label>
+                <h2 class="date-label">{{formatDate(entry.date)}}</h2>
+                <p [ngClass]="{'high-hours': entry.hours > 8, 'medium-hours': entry.hours > 4 && entry.hours <= 8, 'low-hours': entry.hours <= 4}">
+                  <span class="hours-value">{{entry.hours}}</span> ساعات ديال الخدمة
+                  <ion-icon 
+                    [name]="entry.hours > 8 ? 'sad-outline' : (entry.hours > 4 ? 'happy-outline' : 'happy')"
+                    [color]="entry.hours > 8 ? 'danger' : (entry.hours > 4 ? 'warning' : 'success')"
+                  ></ion-icon>
+                </p>
+              </ion-label>
+              <ion-badge slot="end" [color]="getColorForHours(entry.hours)">
+                {{getJudgmentForHours(entry.hours)}}
+              </ion-badge>
+            </ion-item>
+            
+            <ion-item-options side="end">
+              <ion-item-option color="danger" (click)="deleteWorkEntry(entry.date)" (keydown.enter)="deleteWorkEntry(entry.date)">
+                <ion-icon slot="icon-only" name="trash"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+
+          <ion-item *ngIf="workHistory.length === 0" lines="none" class="empty-history">
+            <ion-label class="text-center">
+              <ion-icon name="calendar-outline" class="empty-icon"></ion-icon>
+              <h3>ما كاين حتى سجل</h3>
+              <p>سجل ساعات الخدمة ديالك باش تشوف تاريخ ديالك هنا</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+    
+    <ion-card class="summary-card" *ngIf="workHistory.length > 0">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="analytics-outline"></ion-icon>
+          ملخص الخدمة
+        </ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <div class="summary-stats">
+          <div class="stat-item">
+            <div class="stat-value" [ngClass]="getColorForHours(weeklyAverage)">{{weeklyAverage.toFixed(1)}}</div>
+            <div class="stat-label">معدل ساعات الخدمة فالسيمانة</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-value primary">{{daysWorkedThisWeek}}</div>
+            <div class="stat-label">عدد أيام الخدمة فهاد السيمانة</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-value danger">{{maxWorkHours}}</div>
+            <div class="stat-label">أكثر عدد ساعات ديال الخدمة</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-value success">{{minWorkHours}}</div>
+            <div class="stat-label">أقل عدد ساعات ديال الخدمة</div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

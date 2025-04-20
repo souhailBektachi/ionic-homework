@@ -1,17 +1,93 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary"> <!-- Add primary color to toolbar -->
     <ion-title>
-      Tab 1
+      عييت (Tired)
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding shaped-content">
+  <div class="dashboard-container">
+    <div class="disappointment-section">
+      <ion-card class="main-card">
+        <ion-card-header>
+          <ion-card-title color="primary"> <!-- Add color -->
+            مقياس الخيبة (Disappointment Meter)
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="meter-container">
+            <div class="meter-background">
+              <ion-progress-bar [value]="disappointmentLevel" [color]="disappointmentColor"></ion-progress-bar>
+            </div>
+            <div class="meter-value">{{(disappointmentLevel * 100).toFixed(0)}}%</div>
+          </div>
+          
+          <div class="judgment-message">
+            <ion-chip [color]="disappointmentColor" outline>
+              <ion-icon [name]="disappointmentLevel > 0.5 ? 'sad-outline' : 'happy-outline'"></ion-icon>
+              <ion-label>{{judgmentMessage}}</ion-label>
+            </ion-chip>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+    <div class="work-checkin">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>واش كتخدم دبا؟ (Are you working now?)</ion-card-title>
+        </ion-card-header>
+        
+        <ion-card-content>
+          <div class="checkin-buttons">
+            <ion-button class="working-button" expand="block" (click)="reportWorking(true)" (keydown.enter)="reportWorking(true)">
+              <ion-icon slot="start" name="briefcase-outline"></ion-icon> <!-- Changed icon -->
+              إيه، كنخدم (Yes, working)
+            </ion-button>
+            
+            <ion-button class="relaxing-button" expand="block" (click)="reportWorking(false)" (keydown.enter)="reportWorking(false)">
+              <ion-icon slot="start" name="cafe-outline"></ion-icon> <!-- Changed icon -->
+              لا، تانرتاح (No, relaxing)
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div class="response-section" *ngIf="lastResponse !== null">
+      <ion-card class="response-card" [ngClass]="{'positive': !lastResponse, 'negative': lastResponse}"> <!-- Removed pulse class, handled by SCSS animation -->
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon [name]="lastResponse ? 'alert-circle-outline' : 'checkmark-circle-outline'"></ion-icon> <!-- Changed icons -->
+            {{lastResponse ? 'حشومة عليك! (Shame!)' : 'مزيان بزاف! (Very good!)'}}
+          </ion-card-title>
+        </ion-card-header>
+        
+        <ion-card-content>
+          <p>{{responseMessage}}</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div class="daily-hours">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>ساعات الخدمة ديال اليوم (Today's Work Hours)</ion-card-title>
+        </ion-card-header>
+        
+        <ion-card-content>
+          <ion-item lines="none" class="hours-input">
+            <ion-label position="stacked">شحال من ساعة خدمتي اليوم؟ (How many hours did you work?)</ion-label>
+            <ion-input type="number" [(ngModel)]="dailyWorkHours" min="0" max="24" placeholder="دخل ساعات الخدمة..." class="custom-input"></ion-input>
+          </ion-item>
+          
+          <ion-button expand="block" color="primary" (click)="submitDailyHours()" (keydown.enter)="submitDailyHours()">
+            سجل ساعات الخدمة (Log Work Hours)
+            <ion-icon slot="end" name="checkmark-outline"></ion-icon>
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
 </ion-content>
